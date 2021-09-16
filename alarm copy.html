@@ -10,15 +10,14 @@
         <h3>연도 - 월 - 일 - 시간 - 분</h3>
         <input id="datetime" type="datetime-local" name="alarmtime">
         <button type="button" onclick="showTime()">확 인</button>
-        <h3 id="warningMassage"> </h3>
-        <h2 id="cuTime"></h2>
+        <p id="nowTime11"></p>
         <h1 id="alarmPop"> </h1>
         <script type="text/javascript">
 
         function curTime () {
             currenTime = new Date();
             console.log(currenTime);
-            document.getElementById("cuTime").innerHTML = currenTime; 
+            document.getElementById("nowTime11").value = 'aaaaa'
            
         };
 
@@ -28,7 +27,7 @@
 
         function showTime(){
             var timeID = setInterval(showTime1,1000);
-            document.getElementById("warningMassage").innerHTML = "Alarm Set!!"
+
             function showTime1(){
             let dateTime = document.getElementById("datetime").value;
             let year = Number(dateTime.slice(0,4));
@@ -36,13 +35,17 @@
             let day = Number(dateTime.slice(8,10));
             let hour = Number(dateTime.slice(11,13));
             let min = Number(dateTime.slice(14,16));
+            console.log('year: ' + year + ', month: ' + month + ', day: ' + day + ', hour: ' + hour + ', min: ' + min);
 
             const nowTime = new Date()
+            const nowTime1 = Date.now()
             const alarmTime = new Date(year, month-1, day, hour, min, nowTime.getSeconds(), nowTime.getMilliseconds());//여기서 시간 엄청 잡아 먹었음 -1 해야댐
 
-            if (alarmTime.getTime() < nowTime.getTime()) {
-                document.getElementById("warningMassage").innerHTML = "현재 시간 이후의 시간을 입력하세요:)"
-                clearInterval(timeID)
+            console.log(alarmTime.getTime());
+            console.log(nowTime1);
+
+            if (alarmTime.getTime() < nowTime1) {
+
             }
 
             if (alarmTime.getTime() === nowTime1) {
@@ -65,8 +68,10 @@
                 popUp();
                 clearInterval(timeID);
             }
+            //document.getElementById("nowTime").innerHTML = nowTime;
         }
         }
         </script>
+        
     </body>
 </html>
